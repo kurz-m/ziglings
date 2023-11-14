@@ -59,7 +59,12 @@ fn fixTooSmall(n: u32) MyNumberError!u32 {
     // If we get a TooSmall error, we should return 10.
     // If we get any other error, we should return that error.
     // Otherwise, we return the u32 number.
-    return detectProblems(n) ???;
+    return if (detectProblems(n)) |number| {
+        return number;
+    } else |err| switch (err) {
+        MyNumberError.TooSmall => 10,
+        else => err,
+    };
 }
 
 fn detectProblems(n: u32) MyNumberError!u32 {
