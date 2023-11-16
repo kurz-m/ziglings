@@ -3,7 +3,7 @@ FROM ubuntu:latest
 
 # Install required packages
 RUN apt-get update && \
-    apt-get install -y curl build-essential valgrind && \
+    apt-get install -y curl git build-essential valgrind && \
     rm -rf /var/lib/apt/lists/*
 
 # Run the installation script for zvm
