@@ -40,7 +40,7 @@ fn isPangram(str: []const u8) bool {
     if (str.len < 26) return false;
 
     // we uses a 32 bit variable of which we need 26 bits
-    var bits: u32 = 0;
+    var bits: u26 = 0;
 
     // loop about all characters in the string
     for (str) |c| {
@@ -53,12 +53,12 @@ fn isPangram(str: []const u8) bool {
             // and are numbered sequentially, we simply subtract the
             // first letter (in this case the 'a') from the character
             // found, and thus get the position of the desired bit
-            bits |= @as(u32, 1) << @truncate(ascii.toLower(c) - 'a');
+            bits |= @as(u26, 1) << @truncate(ascii.toLower(c) - 'a');
         }
     }
     // last we return the comparison if all 26 bits are set,
     // and if so, we know the given string is a pangram
     //
     // but what do we have to compare?
-    return bits == 0x..???;
+    return bits == 0x3FFFFFF;
 }
