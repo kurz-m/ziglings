@@ -1092,6 +1092,7 @@ const exercises = [_]Exercise{
         \\King
         \\of
         \\Kings
+        \\
         \\Look
         \\on
         \\my
