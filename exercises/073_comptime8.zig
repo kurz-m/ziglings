@@ -32,7 +32,7 @@ const llamas = [llama_count]u32{ 5, 10, 15, 20, 25 };
 pub fn main() void {
     // We meant to fetch the last llama. Please fix this simple
     // mistake so the assertion no longer fails.
-    const my_llama = getLlama(5);
+    const my_llama = comptime getLlama(llama_count - 1);
 
     print("My llama value is {}.\n", .{my_llama});
 }
