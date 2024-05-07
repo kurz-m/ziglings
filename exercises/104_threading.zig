@@ -90,19 +90,19 @@ pub fn main() !void {
     // end of the program.
     {
         // Now we start the first thread, with the number as parameter
-        const handle = try std.Thread.spawn(.{}, thread_function, .{1});
+        const handle = try std.Thread.spawn(.{}, threadFunction, .{1});
 
         // Waits for the thread to complete,
         // then deallocates any resources created on `spawn()`.
         defer handle.join();
 
         // Second thread
-        const handle2 = try std.Thread.spawn(.{}, thread_function, .{-4}); // that can't be right?
+        const handle2 = try std.Thread.spawn(.{}, threadFunction, .{2}); // that can't be right?
         defer handle2.join();
 
         // Third thread
-        const handle3 = try std.Thread.spawn(.{}, thread_function, .{3});
-        defer ??? // <-- something is missing
+        const handle3 = try std.Thread.spawn(.{}, threadFunction, .{3});
+        defer handle3.join();
 
         // After the threads have been started,
         // they run in parallel and we can still do some work in between.
@@ -116,7 +116,7 @@ pub fn main() !void {
 
 // This function is started with every thread that we set up.
 // In our example, we pass the number of the thread as a parameter.
-fn thread_function(num: usize) !void {
+fn threadFunction(num: usize) !void {
     std.time.sleep(200 * num * std.time.ns_per_ms);
     std.debug.print("thread {d}: {s}\n", .{ num, "started." });
 

@@ -397,6 +397,7 @@ const ZiglingStep = struct {
         // Enable C support for exercises that use C functions.
         if (self.exercise.link_libc) {
             zig_args.append("-lc") catch @panic("OOM");
+            zig_args.append("-lm") catch @panic("OOM");
         }
 
         zig_args.append(b.pathFromRoot(path)) catch @panic("OOM");

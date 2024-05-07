@@ -77,18 +77,18 @@ pub fn main() !void {
 
     {
         // First thread to calculate the plus numbers.
-        const handle1 = try std.Thread.spawn(.{}, thread_pi, .{ &pi_plus, 5, count });
+        const handle1 = try std.Thread.spawn(.{}, threadPi, .{ &pi_plus, 5, count });
         defer handle1.join();
 
         // Second thread to calculate the minus numbers.
-        ???
-        
+        const handle2 = try std.Thread.spawn(.{}, threadPi, .{ &pi_minus, 3, count });
+        defer handle2.join();
     }
     // Here we add up the results.
     std.debug.print("PI ≈ {d:.8}\n", .{4 + pi_plus - pi_minus});
 }
 
-fn thread_pi(pi: *f64, begin: u64, end: u64) !void {
+fn threadPi(pi: *f64, begin: u64, end: u64) !void {
     var n: u64 = begin;
     while (n < end) : (n += 4) {
         pi.* += 4 / @as(f64, @floatFromInt(n));
