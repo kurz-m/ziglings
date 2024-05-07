@@ -43,6 +43,7 @@ const std = @import("std");
 // and here the new import for C
 const c = @cImport({
     @cInclude("unistd.h");
+    @cInclude("string.h");
 });
 
 pub fn main() void {
@@ -54,7 +55,7 @@ pub fn main() void {
     //
     // In this exercise we use 'write' to output 17 chars,
     // but something is still missing...
-    const c_res = write(2, "Hello C from Zig!", 17);
+    const c_res = c.write(2, "Hello C from Zig!", c.strlen("Hello C from Zig!"));
 
     // let's see what the result from C is:
     std.debug.print(" - C result is {d} chars written.\n", .{c_res});
